@@ -20,6 +20,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+    
         
         // Do any additional setup after loading the view.
     }
@@ -29,6 +30,7 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let imageStr = self.movie?.poster_path,let imageURl = APIHandler.getImageURL(imagePath: imageStr) {
             movieImageView.af_setImage(
                 withURL: imageURl,
@@ -38,6 +40,11 @@ class DetailViewController: UIViewController {
             
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+
     func setUI(){
         detailScrollView.alwaysBounceVertical = true
         self.contentVIew.autoresizingMask = .flexibleHeight
@@ -57,7 +64,6 @@ class DetailViewController: UIViewController {
             self.releaseDateLabel.text = "Release Date:" + (movieItem.release_date ?? "Not Available")
             self.descriptionLabel.text = movieItem.overview ?? "No Description"
         }
-    
     }
     /*
     // MARK: - Navigation

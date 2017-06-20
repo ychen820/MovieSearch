@@ -19,7 +19,7 @@ class MainViewController: UIViewController,UISearchControllerDelegate,UISearchBa
     var movieItems = [MovieItem]()
     var refreshControl = UIRefreshControl()
     var currentPage = 1
-    
+    var searchText = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionViewLayout()
@@ -80,8 +80,16 @@ extension MainViewController:UICollectionViewDelegate{
             self.searchController.dismiss(animated: false, completion: nil)
             print(indexPath.row)
             detailVC.movie = movieItems[indexPath.row]
+            backButtonSetup()
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
+    }
+    
+    func backButtonSetup(){
+        self.navigationItem.backBarButtonItem?.title = "Back"
+        self.navigationItem.leftBarButtonItem = nil
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButton
     }
 }
 
@@ -90,7 +98,8 @@ extension MainViewController:UISearchResultsUpdating{
            }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !(searchBar.text?.isEmpty)!{
-            self.navigationItem.title = searchBar.text
+            self.navigationItem.title = "Searching: " + searchBar.text!
+            self.searchText = searchBar.text!
         }
         else{
             self.navigationItem.title = "Movies"
@@ -104,8 +113,8 @@ extension MainViewController:UISearchResultsUpdating{
 
     }
     func loadData(){
-        if let searchText = self.searchBar.text{
-            APIHandler.searchMovie(query: searchText, page: currentPage, comletion: { (movies) in
+    
+            APIHandler.searchMovie(query: self.searchText, page: currentPage, comletion: { (movies) in
                 print(movies)
                 self.movieItems += movies
                 self.currentPage += 1
@@ -115,6 +124,6 @@ extension MainViewController:UISearchResultsUpdating{
                 }
             })
         }
-    }
+    
 }
 

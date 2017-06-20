@@ -212,8 +212,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="er1-Wu-ZYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationItem title="Title" id="ezR-Ct-k3J"/>
             </objects>
-            <point key="canvasLocation" x="1168.8" y="975.56221889055485"/>
+            <point key="canvasLocation" x="1134" y="898"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BBe-aV-ZcS">
