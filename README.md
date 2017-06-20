@@ -1,3 +1,3 @@
 # MovieSearch
 ## Run pod install
-## Open the xcworkdspace to run the code
+## Open the xcworkspace to run the code
